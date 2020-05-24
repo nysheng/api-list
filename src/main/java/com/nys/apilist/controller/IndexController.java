@@ -51,10 +51,8 @@ public class IndexController {
 			resultVO.append("params", Arrays.asList(params));
 		}
 		map.put("resultVO", resultVO.append("apiInfo", apiInfo));
-		//调用对应的模板页面返回给用户(模板页面是根据url的域名进行命名的)
-		String temp=apiInfo.getUrl().substring(apiInfo.getUrl().indexOf("//")+2);
-		temp=temp.substring(0,temp.indexOf("/"));
-		return new ModelAndView("api_pages/"+temp,map);
+		//调用对应的模板页面返回给用户(模板页面是根据id进行命名的)
+		return new ModelAndView("api_pages/"+id,map);
 	}
 	
 }
