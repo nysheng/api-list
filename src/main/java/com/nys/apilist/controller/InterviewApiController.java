@@ -86,7 +86,7 @@ public class InterviewApiController {
 	 * @return
 	 */
 	@GetMapping("/interview_no_params/{id}")
-	public JSONObject interviewNoParams(@PathVariable("id")Integer id,Map<String, Object> map) {
+	public Object interviewNoParams(@PathVariable("id")Integer id,Map<String, Object> map) {
 		//去数据库查询API详情
 		ApiInfo apiInfo=apiInfoService.getAPIById(id);
 		if(apiInfo==null) {
@@ -94,7 +94,8 @@ public class InterviewApiController {
 		}
 		//发送get请求
 		RestTemplate restTemplate =new RestTemplate();
-		JSONObject result=restTemplate.getForObject(apiInfo.getUrl(), JSONObject.class);
-		return result;
+		String result=restTemplate.getForObject(apiInfo.getUrl(), String.class);
+		JSONObject jo=new JSONObject();
+		return jo.parse(result);
 	}
 }
