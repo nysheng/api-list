@@ -1,1 +1,10 @@
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/api-list?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: nys123456
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
