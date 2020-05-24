@@ -1,4 +1,7 @@
-
+server:
+  servlet:
+    context-path: /api-list
+    
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -8,3 +11,5 @@ spring:
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
+  freemarker:
+    suffix: .ftl
