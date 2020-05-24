@@ -18,22 +18,7 @@
                 </div>
 			</div>
 			<hr/>
-			<div class="jumbotron">
-				<h2>
-					查询结果：
-				</h2>
-				<p>GCJ-02火星坐标系：</p>
-				<p id="gcj-lng">经度：</p>
-				<p id="gcj-lat">纬度：</p>
-				<hr/>
-				<p>BD09百度坐标系：</p>
-				<p id="bd09-lng">经度：</p>
-				<p id="bd09-lat">纬度：</p>
-				<hr/>
-				<a id="url"></a>
-				<p id="address">地址：</p>
-				<p id="ip">IP：</p>
-			</div>
+			<img id="image" class="img-thumbnail" />
 		</div>
 		<div class="col-md-2 column">
 		</div>
@@ -49,8 +34,9 @@
 	//2、发送请求
 	function getApiResult(){
 		$.ajax({
-			url:"/api-list/api/interview_no_params/${resultVO.data.apiInfo.id?c}",
+			url:"/api-list/api/interview/${resultVO.data.apiInfo.id?c}",
 			type:"get",
+			data:"format=json",
 			success:function(result){
 				callback(result);
 			}
@@ -58,15 +44,16 @@
 	}
 	//3、回调函数
 	function callback(result){
-		if(result.status==1){
-			$("#gcj-lng").append(result.gcj.lng);
-			$("#gcj-lat").append(result.gcj.lat);
-			$("#bd09-lng").append(result.gcj.lng);
-			$("#bd09-lat").append(result.gcj.lat);
-			$("#url").append('<button type="button" class="btn btn-primary">查看地图</button>').attr("href",result.url);
-			$("#address").append(result.address);
-			$("#ip").append(result.ip);
+		if(result.code==200){
+			$("#image").attr("width",result.data.width);
+			$("#image").attr("height",result.data.height);
+			$("#image").attr("src",result.data.url);
 		}
+		
 	}
+	//4、点击图片刷新
+	$("#image").click(function(){
+		getApiResult();
+	});
 </script>
 </html>
