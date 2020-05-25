@@ -49,7 +49,7 @@
 </body>
 <script type="text/javascript">
 	$(function(){
-		$("input").attr("placeholder","城市ID，101010100-北京，101020100-上海，101040100-重庆，101270101-成都，更多“查看各城市ID”");
+		$("input").attr("placeholder","城市ID，101010100-北京，101020100-上海，101040100-重庆，默认为 101270101-成都，更多“查看各城市ID”");
 	});
 	//1、输入完参数后，点击开始，直接去发送ajax请求，获取json信息
 	$("#start").click(function(){
@@ -64,6 +64,9 @@
 		$("#quality").html("");
 		$("#wendu").html("");
 		$("#ganmao").html("");
+		if($("input").val()==""){
+			$("input").val("101270101");
+		}
 		getApiList();
 	});
 	//2、发送请求
