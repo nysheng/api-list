@@ -14,7 +14,7 @@
             	</div>
             	<div class="api-desc">${resultVO.data.apiInfo.comment}</div>
             	<div class="alert alert-warning" role="alert">
-                	<button type="button" class="btn btn-primary">无限制</button>
+                	<button type="button" class="btn btn-primary">10QPS</button>
                 	<button type="button" class="btn btn-primary">支持HTTPS</button>        
                 </div>
 			</div>
