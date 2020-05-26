@@ -13,7 +13,7 @@
             	</div>
             	<div class="api-desc">${resultVO.data.apiInfo.comment}</div>
             	<div class="alert alert-warning" role="alert">
-                	<button type="button" class="btn btn-primary">10QPS</button>
+                	<button type="button" class="btn btn-primary">无限制</button>
                 	<button type="button" class="btn btn-primary">支持HTTPS</button>                
                 </div>
 			</div>
@@ -24,12 +24,11 @@
     				<h3 class="panel-title">中英互译</h3>
   				</div>
   				<div class="panel-body">
-  					<textarea id="source" onkeyup="translation(this.value)" wrap="hard" style="height: 200px; width: 340px;"></textarea>
+  					<textarea id="source" onkeyup="translation(this.value)" wrap="hard" style="height: 200px; width: 325px;"></textarea>
   					>>>
-    				<textarea id="target" style="height: 200px; width: 340px;"></textarea>
+    				<textarea id="target" style="height: 200px; width: 325px;"></textarea>
   				</div>
 			</div>
-				
 				
 			
 		</div>
