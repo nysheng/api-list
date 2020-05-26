@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nys.apilist.dataobject.ApiInfo;
@@ -21,12 +20,11 @@ public class IndexController {
 	private ApiInfoService apiInfoService;
 	/**
 	 * 主页数据
-	 * @param openid 微信openid
 	 * @param map
 	 * @return
 	 */
 	@GetMapping("/index")
-	public ModelAndView index(@RequestParam("openid")String openid,Map<String, Object> map) {
+	public ModelAndView index(Map<String, Object> map) {
 		//1.openid校验
 		//TODO...
 		//2.获取所有API信息
