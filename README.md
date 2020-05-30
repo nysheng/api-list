@@ -22,3 +22,4 @@
 8. 为了不将API信息直接暴露给用户，所有API的访问均在后端通过SpringBoot的RestTemplate发送请求来完成，前端只需传入对应API的id值即可
 
 #### 部分界面展示
+![主页-index](https://img-blog.csdnimg.cn/20200530181912973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNzgwODA1,size_16,color_FFFFFF,t_70)
