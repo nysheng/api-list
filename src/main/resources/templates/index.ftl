@@ -27,7 +27,12 @@
 									${api.name}
 								</h3>
 								<p>
-								 	<a class="btn btn-primary" href="/api-list/details/${api.id?c}">进入</a>
+									<#if countList[api_index]?number gt 0>
+										<a class="btn btn-primary" href="/api-list/details/${api.id?c}">  进入  </a> 
+									<#else>
+										<span class="btn btn-default btn-primary disabled">  进入  </span> 
+									</#if>
+								 	<span style="float:right;" class="btn btn-default btn-warning">今日可访问次数：${countList[api_index]}</span>
 								</p>
 							</div>
 						</div>
