@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import com.alibaba.fastjson.JSONObject;
+
+import com.alibaba.fastjson.JSON;
 import com.nys.apilist.dataobject.ApiInfo;
+import com.nys.apilist.exception.APIException;
 import com.nys.apilist.service.ApiInfoService;
 
 
@@ -24,7 +26,7 @@ public class InterviewApiController {
 	@Autowired 
 	private ApiInfoService apiInfoService;
 	/**
-	 * 发送有参数的get请求
+	 * 发送有参数的get请求-参数形式：url?a=1&b=2
 	 * @param id API的id值
 	 * @param map
 	 * @param request 请求域，用于获得参数值
@@ -35,7 +37,7 @@ public class InterviewApiController {
 		//去数据库查询API详情
 		ApiInfo apiInfo=apiInfoService.getAPIById(id);
 		if(apiInfo==null) {
-			//TODO...
+			throw new APIException();
 		}
 		String paramStr=apiInfo.getParamsStr();
 		//解析参数
@@ -49,11 +51,11 @@ public class InterviewApiController {
 		//发送get请求
 		RestTemplate restTemplate=new RestTemplate();
 		String result=restTemplate.getForObject(apiInfo.getUrl()+"?"+param, String.class);
-		JSONObject jo=new JSONObject();
-		return jo.parse(result);
+		return JSON.parse(result);
 	}
 	/**
-	 * 发送有参数的get请求-以url参数的形式
+	 * 发送有参数的get请求-参数形式：url/key/value
+	 * 需要发送的参数只有一个
 	 * @param id
 	 * @param map
 	 * @param request
@@ -64,25 +66,21 @@ public class InterviewApiController {
 		//去数据库查询API详情
 		ApiInfo apiInfo=apiInfoService.getAPIById(id);
 		if(apiInfo==null) {
-			//TODO...
+			throw new APIException();
 		}
-		String paramStr=apiInfo.getParamsStr();
+		String key=apiInfo.getParamsStr();
+		String value=request.getParameter(key);
 		//解析参数
-		String[] params=paramStr.split("-");
 		String param="";
-		for(String key : params) {
-			String value=request.getParameter(key);
-			if(StringUtils.isEmpty(value)) {
-				param+="/"+key;
-			}else {
-				param+="/"+key+"/"+value;
-			}
+		if(StringUtils.isEmpty(value)) {
+			param+="/"+key;
+		}else {
+			param+="/"+key+"/"+value;
 		}
 		//发送get请求
 		RestTemplate restTemplate=new RestTemplate();
 		String result=restTemplate.getForObject(apiInfo.getUrl()+param, String.class);
-		JSONObject jo=new JSONObject();
-		return jo.parse(result);
+		return JSON.parse(result);
 	}
 	/**
 	 * 发送无参get请求
@@ -95,12 +93,11 @@ public class InterviewApiController {
 		//去数据库查询API详情
 		ApiInfo apiInfo=apiInfoService.getAPIById(id);
 		if(apiInfo==null) {
-			//TODO...
+			throw new APIException();
 		}
 		//发送get请求
-		RestTemplate restTemplate =new RestTemplate();
+		RestTemplate restTemplate=new RestTemplate();
 		String result=restTemplate.getForObject(apiInfo.getUrl(), String.class);
-		JSONObject jo=new JSONObject();
-		return jo.parse(result);
+		return JSON.parse(result);
 	}
 }

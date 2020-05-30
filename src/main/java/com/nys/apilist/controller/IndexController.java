@@ -1,6 +1,7 @@
 package com.nys.apilist.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.nys.apilist.dataobject.ApiInfo;
+import com.nys.apilist.exception.APIException;
 import com.nys.apilist.service.ApiInfoService;
 import com.nys.apilist.vo.ResultVO;
 
+/**
+ * 主页-controller
+ * @author nysheng
+ *
+ */
 @Controller
 public class IndexController {
 
@@ -25,10 +31,9 @@ public class IndexController {
 	 */
 	@GetMapping("/index")
 	public ModelAndView index(Map<String, Object> map) {
-		//1.openid校验
-		//TODO...
-		//2.获取所有API信息
-		map.put("resultVO", ResultVO.success().append("apiList", apiInfoService.getAllAPI()));
+		//获取所有API信息
+		List<ApiInfo> apiInfoList=apiInfoService.getAllAPI();
+		map.put("resultVO", ResultVO.success().append("apiList", apiInfoList));
 		return new ModelAndView("index",map);
 	}
 	/**
@@ -42,6 +47,9 @@ public class IndexController {
 		
 		//1.去数据库查询API详情
 		ApiInfo apiInfo=apiInfoService.getAPIById(id);
+		if(apiInfo==null) {
+			throw new APIException();
+		}
 		String paramsStr=apiInfo.getParamsStr();
 		if(paramsStr!=null) {
 			//若api需要参数，将参数名解析后返回给用户，让用户填写信息
