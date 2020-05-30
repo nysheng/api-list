@@ -19,6 +19,6 @@
 5. 以客户端IP作为用户的唯一标识
 6. 以Spring Boot为基础编写后端代码，后端统一返回模型视图和访问相关API后获得的JSON数据
 7. AOP统一管理后端异常，以AOP的方式完成Redis计数
-8. 为了不将API信息直接暴露给用户，所有API的访问均在后端通过SpringBoot的RESTTemplement发送请求来完成，前端只需传入对应API的id值即可
+8. 为了不将API信息直接暴露给用户，所有API的访问均在后端通过SpringBoot的RestTemplate发送请求来完成，前端只需传入对应API的id值即可
 
 #### 部分界面展示
