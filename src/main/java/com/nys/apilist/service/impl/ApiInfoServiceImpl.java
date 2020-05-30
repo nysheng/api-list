@@ -1,5 +1,6 @@
 package com.nys.apilist.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,12 @@ public class ApiInfoServiceImpl implements ApiInfoService{
 	 */
 	@Override
 	public List<ApiInfo> getAllAPI() {
+		//1.获取所有API信息
 		List<ApiInfo> list=repository.findAll();
-		log.info("【查询所有API信息】：{}",list.size());
+		if(list==null) {
+			log.info("【查询所有API】查询结果为空");
+			return new ArrayList<ApiInfo>();
+		}
 		return list;
 	}
 	/**
@@ -36,7 +41,7 @@ public class ApiInfoServiceImpl implements ApiInfoService{
 	public ApiInfo getAPIById(Integer id) {
 		Optional<ApiInfo> optional= repository.findById(id);
 		if(optional==null) {
-			log.warn("【根据id查询API】查询失败：null");
+			log.warn("【根据id查询API】API不存在：null");
 			return null;
 		}
 		ApiInfo apiInfo=optional.get();

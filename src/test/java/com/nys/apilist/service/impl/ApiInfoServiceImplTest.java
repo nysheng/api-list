@@ -1,10 +1,6 @@
 package com.nys.apilist.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
-
-import org.apache.http.util.Asserts;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
