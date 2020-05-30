@@ -9,7 +9,16 @@ spring:
     username: root
     password: nys123456
   jpa:
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.H2Dialect
   freemarker:
     suffix: .ftl
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  data:
+    redis:
+      repositories:
+        enabled: false
+api: 
+  count: 5
